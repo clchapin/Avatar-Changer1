@@ -8,8 +8,6 @@ function Module.load()
 	if RunService:IsClient() then
 		print("[Avatar Changer] Client initialized successfully!")
 		
-		-- You can place the full client script logic directly here 
-		-- or trigger your UI creation here.
 		local player = Players.LocalPlayer
 		local playerGui = player:WaitForChild("PlayerGui")
 		
@@ -19,7 +17,6 @@ function Module.load()
 			screenGui.ResetOnSpawn = false
 			screenGui.Parent = playerGui
 			
-			-- Simple confirmation label so you know it loaded
 			local label = Instance.new("TextLabel")
 			label.Size = UDim2.new(0, 200, 0, 50)
 			label.Position = UDim2.new(0.5, -100, 0, 10)
