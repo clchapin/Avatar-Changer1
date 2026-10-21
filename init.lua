@@ -1,18 +1,33 @@
--- init.lua (Loader)
+-- init.lua
 local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 
 local Module = {}
 
 function Module.load()
-	if RunService:IsServer() then
-		print("[Loader] Loading Server Script...")
-		local serverScript = require(script.Server) -- Or load via raw GitHub URL if using loadstring
-		serverScript.init()
+	if RunService:IsClient() then
+		print("[Avatar Changer] Client initialized successfully!")
 		
-	elseif RunService:IsClient() then
-		print("[Loader] Loading Client Script...")
-		local clientScript = require(script.Client)
-		clientScript.init()
+		-- You can place the full client script logic directly here 
+		-- or trigger your UI creation here.
+		local player = Players.LocalPlayer
+		local playerGui = player:WaitForChild("PlayerGui")
+		
+		if not playerGui:FindFirstChild("AvatarChangerGui") then
+			local screenGui = Instance.new("ScreenGui")
+			screenGui.Name = "AvatarChangerGui"
+			screenGui.ResetOnSpawn = false
+			screenGui.Parent = playerGui
+			
+			-- Simple confirmation label so you know it loaded
+			local label = Instance.new("TextLabel")
+			label.Size = UDim2.new(0, 200, 0, 50)
+			label.Position = UDim2.new(0.5, -100, 0, 10)
+			label.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+			label.TextColor3 = Color3.fromRGB(255, 255, 255)
+			label.Text = "GitHub Script Loaded!"
+			label.Parent = screenGui
+		end
 	end
 end
 
